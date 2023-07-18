@@ -4,8 +4,13 @@ from common import Node
 class StackAsList:
     def __init__(self):
         self._top = None
+        self._min = None
 
     def push(self, item):
+        if self._min is None:
+            self._min = item
+        elif item < self._min:
+            self._min = item
         node = Node(item)
         node.next = self._top
         self._top = node
@@ -16,6 +21,9 @@ class StackAsList:
         result = self._top
         self._top = self._top.next
         return result.data
+
+    def min(self):
+        return self._min
 
     def is_empty(self):
         return self._top is None
